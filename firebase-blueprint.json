@@ -1,0 +1,90 @@
+{
+  "entities": {
+    "student": {
+      "title": "student",
+      "description": "Information about a Quran student",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "grade": { "type": "number" },
+        "behaviorScore": { "type": "number" },
+        "interests": { "type": "array" },
+        "notes": { "type": "string" },
+        "birthDate": { "type": "string" },
+        "age": { "type": "number" },
+        "email": { "type": "string" },
+        "password": { "type": "string" },
+        "phone": { "type": "string" },
+        "parentName": { "type": "string" },
+        "parentPhone": { "type": "string" },
+        "parentEmail": { "type": "string" },
+        "parentPassword": { "type": "string" },
+        "currentSurah": { "type": "string" },
+        "currentAyah": { "type": "number" }
+      },
+      "required": ["name", "grade", "behaviorScore"]
+    },
+    "teacher": {
+      "title": "teacher",
+      "description": "A teacher or educator managing groups",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "subject": { "type": "string" },
+        "email": { "type": "string" },
+        "password": { "type": "string" },
+        "yearsExperience": { "type": "number" }
+      },
+      "required": ["name", "subject", "email", "yearsExperience"]
+    },
+    "group": {
+      "title": "group",
+      "description": "Quran study group containing multiple students",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "studentIds": { "type": "array" },
+        "teacherId": { "type": "string" }
+      },
+      "required": ["name", "studentIds"]
+    },
+    "event": {
+      "title": "calendar_event",
+      "description": "A scheduled event, activity, class, or meeting",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "startTime": { "type": "string" },
+        "durationMinutes": { "type": "number" },
+        "groupId": { "type": "string" },
+        "teacherId": { "type": "string" },
+        "type": { "type": "string", "enum": ["class", "meeting", "activity"] }
+      },
+      "required": ["title", "startTime", "durationMinutes", "type"]
+    }
+  },
+  "firestore": {
+    "students/{studentId}": {
+      "schema": "student",
+      "description": "Collection of students registered in the platform"
+    },
+    "teachers/{teacherId}": {
+      "schema": "teacher",
+      "description": "Collection of teachers in the mosque study circles"
+    },
+    "groups/{groupId}": {
+      "schema": "group",
+      "description": "Collection of learning groups"
+    },
+    "events/{eventId}": {
+      "schema": "event",
+      "description": "Mosque calendar and study circle event logs"
+    }
+  }
+}
